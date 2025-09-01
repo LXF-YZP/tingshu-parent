@@ -3,6 +3,7 @@ package com.atguigu.tingshu.album.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.atguigu.tingshu.album.mapper.*;
 import com.atguigu.tingshu.album.service.BaseCategoryService;
+import com.atguigu.tingshu.model.album.BaseAttribute;
 import com.atguigu.tingshu.model.album.BaseCategory1;
 import com.atguigu.tingshu.model.album.BaseCategoryView;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -84,5 +85,11 @@ public class BaseCategoryServiceImpl extends ServiceImpl<BaseCategory1Mapper, Ba
 			list.add(category1);
 		}
 		return list;
+	}
+
+	@Override
+	public List<BaseAttribute> findAttribute(Long category1Id) {
+
+		return baseAttributeMapper.selectAttribute(category1Id);
 	}
 }

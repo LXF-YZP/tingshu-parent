@@ -1,7 +1,12 @@
 package com.atguigu.tingshu.user.api;
 
+import com.atguigu.tingshu.common.login.TsLogin;
+import com.atguigu.tingshu.common.login.TsLoginAspect;
 import com.atguigu.tingshu.common.result.Result;
+import com.atguigu.tingshu.common.util.AuthContextHolder;
 import com.atguigu.tingshu.user.service.UserInfoService;
+import com.atguigu.tingshu.vo.user.UserInfoVo;
+import com.rabbitmq.client.Return;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +26,22 @@ public class WxLoginApiController {
 
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private TsLoginAspect tsLoginAspect;
 
-    /**
-     * 微信登录
-     * @param code
-     * @return
-     */
+    //获取用户信息
+    @TsLogin
+    @Operation(summary = "获取用户信息")
+    @GetMapping("/getUserInfo")
+    public Result getUserInfo(){
+        Long userId = AuthContextHolder.getUserId();
+        UserInfoVo userInfoVo = userInfoService.getUserInfo(userId);
+        return Result.ok(userInfoVo);
+    }
+
+
+
+    // 微信登录
     @Operation(summary = "微信登录")
     @GetMapping("/wxLogin/{code}")
     public Result wxLogin(@PathVariable String code) {

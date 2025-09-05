@@ -44,6 +44,7 @@ public class AlbumInfoApiController {
 	}
 
 	//更新专辑
+
 	@Operation(summary = "根据专辑id更新专辑信息")
 	@PostMapping("/updateAlbumInfo/{albumId}")
 	public Result updateAlbumInfo(@PathVariable("albumId") Long albumId,
@@ -54,7 +55,7 @@ public class AlbumInfoApiController {
 	}
 
 	@Operation(summary = "根据专辑id查看专辑信息")
-	@GetMapping("/getALbumInfo/{albumId}")
+	@GetMapping("/getAlbumInfo/{albumId}")
 	public Result getAlblumInfo(@PathVariable("albumId") Long albumId) {
 		AlbumInfo albumInfoVo = albumInfoService.getAlbumInfo(albumId);
 		return Result.ok(albumInfoVo);

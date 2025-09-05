@@ -49,7 +49,8 @@ public class AlbumInfoServiceImpl extends ServiceImpl<AlbumInfoMapper, AlbumInfo
 	}
 
 	@Override
-	public AlbumInfo getAlbumInfo(Long albumId) {
+	public AlbumInfo
+	getAlbumInfo(Long albumId) {
 
 		//因为需要给专辑标签赋值，即给albumAttributeValueVoList赋值
 		AlbumInfo albumInfo = albumInfoMapper.selectById(albumId);

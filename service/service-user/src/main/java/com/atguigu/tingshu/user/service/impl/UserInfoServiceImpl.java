@@ -8,10 +8,12 @@ import com.atguigu.tingshu.common.rabbit.service.RabbitService;
 import com.atguigu.tingshu.model.user.UserInfo;
 import com.atguigu.tingshu.user.mapper.UserInfoMapper;
 import com.atguigu.tingshu.user.service.UserInfoService;
+import com.atguigu.tingshu.vo.user.UserInfoVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -73,5 +75,20 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("token", token);
 		return map;
+	}
+
+	/*
+	*
+	* */
+	@Override
+	public UserInfoVo getUserInfo(Long userId) {
+
+		//查询用户信息
+		UserInfo userInfo = this.getById(userId);
+		//创建目标对象
+		UserInfoVo userInfoVo = new UserInfoVo();
+		BeanUtils.copyProperties(userInfoVo, userInfoVo);
+		return userInfoVo;
+
 	}
 }
